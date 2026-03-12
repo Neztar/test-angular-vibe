@@ -1,0 +1,14 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/test-angular-vibe",
+  "env": {
+    "DISABLE_ESLINT_PLUGIN": "true"
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "destination": "/index.html",
+      "status": 200
+    }
+  ]
+}

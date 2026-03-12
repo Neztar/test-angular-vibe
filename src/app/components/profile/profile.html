@@ -1,0 +1,36 @@
+<div class="profile-container">
+  <div class="profile-header">
+    <h1>{{ name }}</h1>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+
+  <div class="profile-content">
+    <!-- Skills Section -->
+    <section class="section">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div *ngFor="let skill of skills" class="skill-tag">
+          {{ skill }}
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section class="section">
+      <h2>Work Experience</h2>
+      <div class="work-experiences">
+        <div *ngFor="let experience of workExperiences" class="company-section">
+          <h3 class="company-name">{{ experience.company }}</h3>
+          <div class="projects">
+            <div *ngFor="let project of experience.projects" class="project">
+              <h4 class="project-name">{{ project.name }}</h4>
+              <ul *ngIf="project.description.length > 0" class="project-description">
+                <li *ngFor="let desc of project.description">{{ desc }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
