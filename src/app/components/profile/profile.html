@@ -1,10 +1,33 @@
 <div class="profile-container">
   <div class="profile-header">
     <h1>{{ name }}</h1>
-    <button class="logout-btn" (click)="logout()">Logout</button>
+    <div class="header-actions">
+      <div class="theme-switcher">
+        <button 
+          class="theme-btn" 
+          [class.active]="currentTheme === 'sakura'"
+          (click)="switchTheme('sakura')"
+          title="Sakura Style">
+          🌸
+        </button>
+        <button 
+          class="theme-btn" 
+          [class.active]="currentTheme === 'forest'"
+          (click)="switchTheme('forest')"
+          title="Forest Style">
+          🌲
+        </button>
+      </div>
+      <button class="logout-btn" (click)="logout()">Logout</button>
+    </div>
   </div>
 
   <div class="profile-content">
+    <!-- Introduction Section -->
+    <section class="section introduction-section">
+      <p>{{ introduction }}</p>
+    </section>
+
     <!-- Skills Section -->
     <section class="section">
       <h2>Skills</h2>
@@ -24,9 +47,11 @@
           <div class="projects">
             <div *ngFor="let project of experience.projects" class="project">
               <h4 class="project-name">{{ project.name }}</h4>
-              <ul *ngIf="project.description.length > 0" class="project-description">
-                <li *ngFor="let desc of project.description">{{ desc }}</li>
-              </ul>
+              @if (project.description.length > 0) {
+                <ul class="project-description">
+                  <li *ngFor="let desc of project.description">{{ desc }}</li>
+                </ul>
+              }
             </div>
           </div>
         </div>

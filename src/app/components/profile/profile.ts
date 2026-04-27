@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Auth } from '../../services/auth';
+import { ThemeService, Theme } from '../../services/theme';
 
 interface WorkExperience {
   company: string;
@@ -19,6 +20,8 @@ interface WorkExperience {
 })
 export class Profile {
   name: string = 'Thitiwat Wuthimapakorn';
+  introduction: string = 'Full-stack developer with expertise in Angular and Java. Passionate about building scalable and efficient web applications.';
+  currentTheme: Theme = 'sakura';
   
   skills: string[] = [
     'Angular',
@@ -73,7 +76,16 @@ export class Profile {
     }
   ];
 
-  constructor(private authService: Auth, private router: Router) {}
+  constructor(private authService: Auth, private router: Router, public themeService: ThemeService) {
+    this.currentTheme = this.themeService.getTheme();
+    this.themeService.theme$.subscribe(theme => {
+      this.currentTheme = theme;
+    });
+  }
+
+  switchTheme(theme: Theme): void {
+    this.themeService.setTheme(theme);
+  }
 
   logout(): void {
     this.authService.logout();
