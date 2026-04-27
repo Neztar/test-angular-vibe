@@ -17,22 +17,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Build Angular') {
             steps {
-                // Generates the /dist folder
-                sh 'npm run build --prod'
+                bat 'npm run build --prod'
             }
         }
 
         stage('Deploy to Vercel') {
             steps {
-                // --prod triggers a production deployment
-                // --yes bypasses confirmation prompts
-                sh "npx vercel --token ${VERCEL_TOKEN} --prod --yes"
+                // Use double quotes for Windows environment variables if needed, 
+                // but bat works fine with the ${} syntax for Jenkins vars
+                bat "npx vercel --token ${VERCEL_TOKEN} --prod --yes"
             }
         }
     }
